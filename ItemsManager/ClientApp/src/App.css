@@ -33,3 +33,7 @@ main {
     align-items: center;
     border-top: 1px solid #e4e4e4;
 }
+
+.dropdown-toggle::after {
+    display: none !important;
+}

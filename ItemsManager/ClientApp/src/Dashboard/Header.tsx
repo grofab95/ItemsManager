@@ -1,7 +1,4 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 const Header: React.FC = () => {
     return (
@@ -15,6 +12,33 @@ const Header: React.FC = () => {
                     <Nav.Link href="#link">Items</Nav.Link>
                     <Nav.Link href="#link">Categories</Nav.Link>
                     <Nav.Link href="#link">Parameters</Nav.Link>
+                </Nav>
+                <Nav>
+                    <NavDropdown
+                        title={
+                            <div className="pull-left">
+                                <img
+                                    className="me-2"
+                                    style={{
+                                        width: "40px",
+                                        borderRadius: "50%",
+                                    }}
+                                    src={"https://github.com/mshaaban0.png"}
+                                    alt="user pic"
+                                />
+                                Fabian
+                            </div>
+                        }
+                        id="basic-nav-dropdown"
+                        align="end"
+                    >
+                        <NavDropdown.Item href="#action/3.1">
+                            Profile
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">
+                            Logout
+                        </NavDropdown.Item>
+                    </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
