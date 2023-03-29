@@ -2,15 +2,21 @@ import "./App.css";
 import Layout from "./Dashboard/Layout";
 import Home from "./Home";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import Users from "./Views/UsersPage/Users";
+import LoginPage from "./Views/LoginPage/LoginPage";
 
 function App() {
+    const showLoginPage = true;
+
     return (
         <>
-            <Layout>
-                <Home />
-            </Layout>
+            {showLoginPage ? (
+                <LoginPage />
+            ) : (
+                <Layout>
+                    <Home />
+                </Layout>
+            )}
         </>
     );
 }
