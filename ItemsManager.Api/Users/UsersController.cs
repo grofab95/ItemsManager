@@ -3,6 +3,7 @@ using ItemsManager.Api.Models;
 using ItemsManager.Api.Users.AddUser;
 using ItemsManager.Api.Users.GetUsers;
 using ItemsManager.Application.Users.AddUser;
+using ItemsManager.Application.Users.GetUser;
 using ItemsManager.Application.Users.GetUsers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -54,6 +55,21 @@ public class UsersController : ControllerBase
         }
 
         var dto = _mapper.Map<UserGetDto>(commandResult.User);
+        return ApiResponse<UserGetDto>.Success(dto);
+    }
+    
+    [HttpGet("{userId}")]
+    public async Task<ApiResponse<UserGetDto>> GetUser([FromRoute] string userId)
+    {
+        _logger.LogInformation("GetUser | GetUser={GetUser}", userId);
+        
+        var queryResult = await _mediator.Send(new GetUserQuery(userId));
+        if (queryResult.IsFailure)
+        {
+            return ApiResponse<UserGetDto>.Failure(queryResult.Error!);
+        }
+
+        var dto = _mapper.Map<UserGetDto>(queryResult.Data);
         return ApiResponse<UserGetDto>.Success(dto);
     }
 }

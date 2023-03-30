@@ -8,6 +8,8 @@ import { useTheme } from "@table-library/react-table-library/theme";
 import { getTheme } from "@table-library/react-table-library/baseline";
 
 import { TableNode } from "@table-library/react-table-library/types/table";
+import { useAppSelector } from "./app/hooks";
+import { ApplicationState } from "./store";
 
 const key = "Compact Table";
 
@@ -46,9 +48,7 @@ const nodes = [
 
 const Home = () => {
     const data = { nodes };
-
     const theme = useTheme(getTheme());
-
     const dattt = [{}] as Column<TableNode>[];
 
     const COLUMNS = [

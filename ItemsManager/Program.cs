@@ -22,6 +22,18 @@ try
     var app = builder.Build();
     app.ConfigureApi();
     app.ConfigureAuthorization();
+    
+    app.UseCors(builder =>
+        {
+            builder
+                .WithOrigins("http://localhost:3000", "https://localhost:3000")
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
+                .AllowAnyHeader()
+                .AllowCredentials()
+                .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
+                .SetPreflightMaxAge(TimeSpan.FromSeconds(3600));
+        }
+    );
 
     app.Run();
 }

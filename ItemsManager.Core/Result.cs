@@ -19,3 +19,18 @@ public class Result<T>
     public bool IsFailure => !IsSuccess;
 
 }
+
+public class Result
+{
+    public static Result WithSuccess => new Result();
+    
+    public static Result WithError(string error) => new Result
+    {
+        Error = error
+    };
+    
+    public string Error { get; private  set; }
+    public bool IsSuccess => string.IsNullOrEmpty(Error);
+    public bool IsFailure => !IsSuccess;
+
+}

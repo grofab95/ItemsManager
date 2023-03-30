@@ -1,6 +1,14 @@
+import { useCallback } from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { useAppDispatch } from "../app/hooks";
+import { logout } from "../store/userSession/api";
 
 const Header: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const dispatchLogout = useCallback(() => {
+        dispatch(logout());
+    }, [dispatch]);
+
     return (
         <Navbar className="px-1" expand="lg">
             <Navbar.Brand href="#home">Items Manager</Navbar.Brand>
@@ -35,7 +43,12 @@ const Header: React.FC = () => {
                         <NavDropdown.Item href="#action/3.1">
                             Profile
                         </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">
+                        <NavDropdown.Item
+                            onClick={(event) => {
+                                event.preventDefault();
+                                dispatchLogout();
+                            }}
+                        >
                             Logout
                         </NavDropdown.Item>
                     </NavDropdown>

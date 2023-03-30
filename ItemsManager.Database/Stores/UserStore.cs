@@ -74,4 +74,20 @@ public class UserStore : IUserStore
             return Result<User[]>.WithError(e.Message);
         }
     }
+
+    public async Task<Result<User>> GetUser(string userId)
+    {
+        try
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            return user == null 
+                ? Result<User>.WithError("User not found") 
+                : Result<User>.WithSuccess(_mapper.Map<User>(user));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "GetUser error | UserId={UserId}", userId);
+            return Result<User>.WithError(e.Message);
+        }
+    }
 }

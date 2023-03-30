@@ -107,23 +107,40 @@ public class AuthenticationService : IAuthenticationService
         }
     }
 
-    public async Task RevokeToken(string token)
+    public async Task<Result> RevokeToken(string token)
     {
-        await using var dbContext = _serviceScopeFactory.CreateScope().ServiceProvider
-            .GetRequiredService<ItemsManagerContext>();
+        try
+        {
+            await using var dbContext = _serviceScopeFactory.CreateScope().ServiceProvider
+                .GetRequiredService<ItemsManagerContext>();
+
+            var user = await dbContext.Users
+                .Include(x => x.RefreshTokens)
+                .SingleOrDefaultAsync(x => x.RefreshTokens.Any(y => y.Token == token));
+
+            if (user == null)
+            {
+                return Result.WithError("Invalid token");
+            }
         
-        var user = await dbContext.Users
-                      .Include(x => x.RefreshTokens)
-                      .SingleOrDefaultAsync(x => x.RefreshTokens.Any(y => y.Token == token))
-                  ?? throw new Exception("Invalid token");
+            var refreshToken = user.RefreshTokens.Single(x => x.Token == token);
+            if (!refreshToken.IsActive)
+            {
+                return Result.WithError("Invalid token");
+            }
         
-        var refreshToken = user.RefreshTokens.Single(x => x.Token == token);
-        if (!refreshToken.IsActive)
-            throw new Exception("Invalid token");
-        
-        refreshToken.RevokedAt = DateTime.Now;
-        dbContext.Update(user);
-        await dbContext.SaveChangesAsync();
+            refreshToken.RevokedAt = DateTime.Now;
+            dbContext.Update(user);
+            await dbContext.SaveChangesAsync();
+
+            return Result.WithSuccess;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "RevokeToken error. Token={Token}", token);
+            return Result.WithError("Error occured while revoking token");
+        }
+       
     }
 
     private async Task<string> GetAccessToken(UserDb user)

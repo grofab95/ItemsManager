@@ -11,4 +11,5 @@ public interface IAuthenticationService
     // Task RevokeToken(string token);
     // Task<string> GetAccessToken(UserDb user);
     // RefreshTokenDb GetRefreshToken();
+    Task<Result> RevokeToken(string requestRefreshToken);
 }

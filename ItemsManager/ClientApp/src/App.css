@@ -20,6 +20,7 @@ footer {
 }
 
 main {
+    height: 100%;
     flex: auto;
     padding: 10px;
     background-color: #f7f7ff;

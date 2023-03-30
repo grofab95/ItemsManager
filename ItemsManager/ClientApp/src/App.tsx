@@ -1,4 +1,3 @@
-import "./App.css";
 import Layout from "./Dashboard/Layout";
 import Home from "./Home";
 

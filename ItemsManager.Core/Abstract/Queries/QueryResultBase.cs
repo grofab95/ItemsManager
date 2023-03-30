@@ -19,7 +19,7 @@ public class QueryResultBase<T> : IQueryResultBase, IMessage
         Id = id;
         Error = error;
     }
-    
+
     protected QueryResultBase(Guid id, T data)
     {
         Id = id;
