@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
-import ensureNonExpiredTokens from "../utils/ensureNonExpiredTokens";
 import AuthenticationHoc from "./AuthenticationHoc";
 
 interface Props {
@@ -9,10 +8,6 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = (props) => {
-    useEffect(() => {
-        ensureNonExpiredTokens();
-    }, []);
-
     return (
         <AuthenticationHoc>
             <header>

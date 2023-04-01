@@ -38,3 +38,14 @@ main {
 .dropdown-toggle::after {
     display: none !important;
 }
+
+.rnc__notification-container--top-right {
+    right: 20px;
+    top: 80px;
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--bs-navbar-active-color);
+    border-bottom: solid;
+    font-weight: bold;
+}

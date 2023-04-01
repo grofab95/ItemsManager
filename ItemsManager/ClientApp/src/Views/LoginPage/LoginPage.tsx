@@ -3,22 +3,27 @@ import { useEffect } from "react";
 import { Button, Card, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { login } from "../../store/userSession/api";
 import { getAccessToken } from "../../utils/authUtils";
+import { ApplicationState } from "../../store";
 
 const LoginPage: React.FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const userSessionToken = useAppSelector(
+        (state: ApplicationState) => state.userSession.currentToken
+    );
 
     useEffect(() => {
         const token = getAccessToken();
         console.log("login token", token);
 
         if (token !== "") {
-            navigate("/");
+            navigate("/home");
         }
-    }, []);
+    }, [userSessionToken]);
 
     const getInitialValues = () => {
         return {

@@ -2,8 +2,11 @@ import { useCallback } from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useAppDispatch } from "../app/hooks";
 import { logout } from "../store/userSession/api";
+import { useLocation } from "react-router-dom";
+import { NavItem } from "./NavItem";
 
 const Header: React.FC = () => {
+    const location = useLocation();
     const dispatch = useAppDispatch();
     const dispatchLogout = useCallback(() => {
         dispatch(logout());
@@ -11,15 +14,19 @@ const Header: React.FC = () => {
 
     return (
         <Navbar className="px-1" expand="lg">
-            <Navbar.Brand href="#home">Items Manager</Navbar.Brand>
+            <Navbar.Brand>Items Manager</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link href="#link">Users</Nav.Link>
-                    <Nav.Link href="#link">Releases</Nav.Link>
-                    <Nav.Link href="#link">Items</Nav.Link>
-                    <Nav.Link href="#link">Categories</Nav.Link>
-                    <Nav.Link href="#link">Parameters</Nav.Link>
+                <Nav
+                    className="me-auto"
+                    activeKey={location.pathname.replace("/", "")}
+                >
+                    <NavItem to="/home" text="Home" />
+                    <NavItem to="/users" text="Users" />
+                    <NavItem to="/items" text="Items" />
+                    <NavItem to="/releases" text="Releases" />
+                    <NavItem to="/categories" text="Categories" />
+                    <NavItem to="/parameters" text="Parameters" />
                 </Nav>
                 <Nav>
                     <NavDropdown

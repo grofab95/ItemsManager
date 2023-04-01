@@ -1,7 +1,5 @@
 import Layout from "./Dashboard/Layout";
 import Home from "./Home";
-
-import Users from "./Views/UsersPage/Users";
 import LoginPage from "./Views/LoginPage/LoginPage";
 
 function App() {
