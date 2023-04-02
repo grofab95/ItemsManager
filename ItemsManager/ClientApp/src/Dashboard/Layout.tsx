@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import AuthenticationHoc from "./AuthenticationHoc";
+import PageWrapper from "../Views/PageWrapper";
 
 interface Props {
     children: React.ReactNode;
@@ -13,7 +13,9 @@ const Layout: React.FC<Props> = (props) => {
             <header>
                 <Header />
             </header>
-            <main>{props.children}</main>
+            <main>
+                <PageWrapper>{props.children}</PageWrapper>
+            </main>
             <footer>
                 <Footer />
             </footer>

@@ -1,5 +1,4 @@
-﻿export default interface RegisterUser {
-    userName: string
-    email: string,
-    password: string
+﻿export default interface AddUser {
+    userName: string;
+    password: string;
 }
