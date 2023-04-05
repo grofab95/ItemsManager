@@ -9,5 +9,6 @@ public static class ServiceCollectionExtensions
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddControllers();
+        services.AddSignalR();
     }
 }

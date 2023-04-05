@@ -9,8 +9,9 @@
 import { hubUrl } from "./config";
 import { getAccessToken } from "../utils/authUtils";
 import { userSessionCallbacks } from "./userSession/hubEvents";
+import { userCallbacks } from "./user/hubEvents";
 
-const signalR = `${process.env.REACT_APP_API_URL}/uiHub`;
+const signalR = `${process.env.REACT_APP_API_URL}/user-events`;
 
 export const connection = new HubConnectionBuilder()
     .configureLogging(LogLevel.Debug)
@@ -38,10 +39,10 @@ const callbacksCombine = (callbacks: Map<string, Callback<any, any>>[]) => {
     return combined;
 };
 
-const callbacks = callbacksCombine([userSessionCallbacks]);
+const callbacks = callbacksCombine([userSessionCallbacks, userCallbacks]);
 
 export const signalrMiddleware = signalMiddleware({
     callbacks,
     connection,
-    shouldConnectionStartImmediately: false,
+    shouldConnectionStartImmediately: true,
 });

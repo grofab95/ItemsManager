@@ -13,7 +13,7 @@ const Header: React.FC = () => {
     }, [dispatch]);
 
     return (
-        <Navbar className="px-1" expand="lg">
+        <Navbar className="px-3" expand="lg">
             <Navbar.Brand>Items Manager</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

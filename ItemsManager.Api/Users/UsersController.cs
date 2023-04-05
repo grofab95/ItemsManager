@@ -29,9 +29,9 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ApiResponse<UserGetDto[]>> GetUsers(GetUsersRequest request)
+    public async Task<ApiResponse<UserGetDto[]>> GetUsers()
     {
-        _logger.LogInformation("GetUsers | Request={@Request}", request);
+        _logger.LogInformation("GetUsers");
 
         var queryResult = await _mediator.Send(new GetUsersQuery());
         if (queryResult.IsFailure)

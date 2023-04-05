@@ -8,7 +8,7 @@ import ApiResponseWithoutData from "../../interfaces/ApiResponseWithoutData";
 import ChangePasswordFactors from "../../interfaces/Users/ChangePasswordFactors";
 
 const apiUrls = {
-    getUsers: () => "users/login",
+    getUsers: () => "users",
     addUser: () => "users",
     changePassword: (userId: string) => `users/${userId}/change-password`,
 };
